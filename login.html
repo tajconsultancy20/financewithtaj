@@ -98,16 +98,13 @@ const auth = getAuth(app);
 
 window.login = async function() {
   try {
-    // ✅ FORCE SESSION SAVE
-    await setPersistence(auth, browserLocalPersistence);
-
     await signInWithEmailAndPassword(
       auth,
       document.getElementById("email").value,
       document.getElementById("password").value
     );
 
-   window.location.replace("/index.html");
+    window.location.replace("/index.html");
 
   } catch (e) {
     alert(e.message);
