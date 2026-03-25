@@ -147,8 +147,7 @@ tr:hover td{background:rgba(255,255,255,.02);}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 </style>
 </head>
-<body>
-<script type="module">
+<body><script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -164,24 +163,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ IMPORTANT FIX
-let checked = false;
+// 🔥 HIDE PAGE INITIALLY
+document.body.style.display = "none";
 
+// ✅ WAIT FOR AUTH STATE (ONLY ONCE)
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log("User logged in:", user.email);
-    checked = true;
+    // show dashboard
+    document.body.style.display = "block";
   } else {
-    if (!checked) {
-      checked = true;
-
-      // ⏳ WAIT before redirect
-      setTimeout(() => {
-        if (!auth.currentUser) {
-          window.location.replace("/login.html");
-        }
-      }, 1000);
-    }
+    // go to login
+    window.location.replace("/login.html");
   }
 });
 </script>
