@@ -80,20 +80,13 @@
 </div>
 
 <script type="module">
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    window.location.href = "/index.html";
-  }
-});const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyBctAYSnRDgmX_pBSGMCcQzr1uS0EjIaNs",
   authDomain: "finance-portal-f1f84.firebaseapp.com",
-  projectId: "finance-portal-f1f84",
-  storageBucket: "finance-portal-f1f84.firebasestorage.app",
-  messagingSenderId: "454088803574",
-  appId: "1:454088803574:web:550311aeed4e72122e18d7",
-  measurementId: "G-ZRYW88JC65"
+  projectId: "finance-portal-f1f84"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -107,13 +100,12 @@ window.login = async function() {
       document.getElementById("password").value
     );
 
-    window.location.replace("/index.html");
+    window.location.href = "/index.html";
 
   } catch (e) {
     alert(e.message);
   }
 };
 </script>
-
 </body>
 </html>
