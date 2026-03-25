@@ -164,21 +164,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ WAIT FOR AUTH STATE (IMPORTANT)
-let isChecked = false;
-
+// ✅ ONLY THIS LOGIC CONTROLS ACCESS
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    isChecked = true;
-    console.log("User logged in:", user.email);
+  if (!user) {
+    window.location.replace("/login.html");
   } else {
-    // ⛔ Only redirect if already checked once
-    if (isChecked === false) {
-      isChecked = true;
-      setTimeout(() => {
-        window.location.replace("/login.html");
-      }, 500); // slight delay
-    }
+    console.log("User OK:", user.email);
   }
 });
 </script>
