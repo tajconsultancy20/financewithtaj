@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - FinanceWithTaj</title>
+  <style>
+    body {
+      margin:0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #1e2230, #0d0f14);
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+    }
+
+    .login-card {
+      background:#1e2230;
+      padding:40px;
+      border-radius:15px;
+      width:320px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+      text-align:center;
+    }
+
+    h2 {
+      margin-bottom:20px;
+    }
+
+    input {
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border:none;
+      border-radius:8px;
+      outline:none;
+      background:#2c3142;
+      color:white;
+    }
+
+    input::placeholder {
+      color:#aaa;
+    }
+
+    button {
+      width:100%;
+      padding:12px;
+      background:#f0b429;
+      border:none;
+      border-radius:8px;
+      margin-top:10px;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    button:hover {
+      background:#e0a800;
+    }
+
+    .brand {
+      font-size:22px;
+      margin-bottom:10px;
+      font-weight:bold;
+      color:#f0b429;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="login-card">
+  <div class="brand">FinanceWithTaj</div>
+  <h2>Login</h2>
+
+  <input id="email" placeholder="Enter Email">
+  <input id="password" type="password" placeholder="Enter Password">
+
+  <button onclick="login()">Login</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBctAYSnRDgmX_pBSGMCcQzr1uS0EjIaNs",
+  authDomain: "finance-portal-f1f84.firebaseapp.com",
+  projectId: "finance-portal-f1f84",
+  storageBucket: "finance-portal-f1f84.firebasestorage.app",
+  messagingSenderId: "454088803574",
+  appId: "1:454088803574:web:550311aeed4e72122e18d7",
+  measurementId: "G-ZRYW88JC65"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = async function() {
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      document.getElementById("email").value,
+      document.getElementById("password").value
+    );
+
+    alert("Login Successful");
+
+    // 🔥 REDIRECT TO MAIN APP
+    window.location.href = "index.html";
+
+  } catch (e) {
+    alert(e.message);
+  }
+};
+</script>
+
+</body>
+</html>
