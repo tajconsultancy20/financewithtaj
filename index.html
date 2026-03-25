@@ -164,14 +164,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ wait for page load
-window.onload = () => {
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.replace("/login.html");
+// ✅ WAIT FOR AUTH STATE (IMPORTANT)
+let isChecked = false;
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    isChecked = true;
+    console.log("User logged in:", user.email);
+  } else {
+    // ⛔ Only redirect if already checked once
+    if (isChecked === false) {
+      isChecked = true;
+      setTimeout(() => {
+        window.location.replace("/login.html");
+      }, 500); // slight delay
     }
-  });
-};
+  }
+});
 </script>
 <nav class="sidebar" id="sidebar">
   <div class="logo">
