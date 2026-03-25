@@ -148,30 +148,30 @@ tr:hover td{background:rgba(255,255,255,.02);}
 </style>
 </head>
 <body>
-<body style="display:none;">
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBctAYSnRDgmX_pBSGMCcQzr1uS0EjIaNs",
+  apiKey: "AIzaSyAtAYSrnDGmX_pBSGMCcQzr1uS0EjIaNs",
   authDomain: "finance-portal-f1f84.firebaseapp.com",
   projectId: "finance-portal-f1f84",
   storageBucket: "finance-portal-f1f84.firebasestorage.app",
   messagingSenderId: "454088803574",
-  appId: "1:454088803574:web:550311aeed4e72122e18d7",
-  measurementId: "G-ZRYW88JC65"
+  appId: "1:454088803574:web:550311aeed4e72122e18d7"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-  
-// ✅ SHOW PAGE ONLY AFTER CHECK
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "/login.html";
-  }
-});
+
+// ✅ wait for page load
+window.onload = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.replace("/login.html");
+    }
+  });
+};
 </script>
 <nav class="sidebar" id="sidebar">
   <div class="logo">
