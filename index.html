@@ -169,13 +169,10 @@ document.body.style.display = "none";
 
 // ✅ WAIT FOR AUTH STATE (ONLY ONCE)
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // show dashboard
-    document.body.style.display = "block";
-  } else {
-    // go to login
-    window.location.replace("/login.html");
+  if (!user) {
+    window.location.href = "/login.html";
   }
+});  }
 });
 </script>
 <nav class="sidebar" id="sidebar">
