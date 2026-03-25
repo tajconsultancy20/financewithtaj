@@ -164,10 +164,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ ONLY THIS LOGIC CONTROLS ACCESS
+// ✅ IMPORTANT FIX
+let checked = false;
+
 onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.replace("/login.html");
+  if (user) {
+    console.log("User logged in:", user.email);
+    checked = true;
+  } else {
+    if (!checked) {
+      checked = true;
+
+      // ⏳ WAIT before redirect
+      setTimeout(() => {
+        if (!auth.currentUser) {
+          window.location.replace("/login.html");
+        }
+      }, 1000);
+    }
   }
 });
 </script>
