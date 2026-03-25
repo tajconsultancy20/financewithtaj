@@ -104,10 +104,8 @@ window.login = async function() {
       document.getElementById("password").value
     );
 
-    alert("Login Successful");
-
-    // 🔥 REDIRECT TO MAIN APP
-    window.location.replace("/index.html");
+    // ✅ JUST GO TO INDEX (NO CHECK HERE)
+    window.location.href = "/index.html";
 
   } catch (e) {
     alert(e.message);
